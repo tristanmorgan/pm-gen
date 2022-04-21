@@ -6,7 +6,7 @@ import (
 	"github.com/df-mc/dragonfly/server/block/model"
 	"github.com/df-mc/dragonfly/server/world"
 	"github.com/df-mc/dragonfly/server/world/chunk"
-	"github.com/t14raptor/pm-gen/rand"
+	"github.com/tristanmorgan/pm-gen/rand"
 )
 
 type Tree struct {

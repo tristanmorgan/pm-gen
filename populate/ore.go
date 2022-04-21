@@ -5,7 +5,7 @@ import (
 	"github.com/df-mc/dragonfly/server/world"
 	"github.com/df-mc/dragonfly/server/world/chunk"
 	"github.com/go-gl/mathgl/mgl64"
-	"github.com/t14raptor/pm-gen/rand"
+	"github.com/tristanmorgan/pm-gen/rand"
 	"math"
 )
 

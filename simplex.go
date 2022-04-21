@@ -1,7 +1,7 @@
 package pmgen
 
 import (
-	"github.com/t14raptor/pm-gen/rand"
+	"github.com/tristanmorgan/pm-gen/rand"
 )
 
 type Grad3 struct {

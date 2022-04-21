@@ -1,4 +1,4 @@
-module github.com/t14raptor/pm-gen
+module github.com/tristanmorgan/pm-gen
 
 go 1.18
 

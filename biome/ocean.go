@@ -3,7 +3,7 @@ package biome
 import (
 	"github.com/df-mc/dragonfly/server/block"
 	"github.com/df-mc/dragonfly/server/world"
-	"github.com/t14raptor/pm-gen/populate"
+	"github.com/tristanmorgan/pm-gen/populate"
 )
 
 type Ocean struct{}
@@ -22,7 +22,7 @@ func (o Ocean) Elevation() (min, max int) {
 
 func (o Ocean) GroundCover() []world.Block {
 	return []world.Block{
-		block.Gravel{},
+		block.Sand{},
 		block.Gravel{},
 		block.Gravel{},
 		block.Gravel{},
@@ -31,9 +31,9 @@ func (o Ocean) GroundCover() []world.Block {
 }
 
 func (o Ocean) Temperature() float64 {
-	panic("implement me")
+	return 0.4
 }
 
 func (o Ocean) Rainfall() float64 {
-	panic("implement me")
+	return 0.5
 }

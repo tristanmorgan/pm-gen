@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"github.com/df-mc/dragonfly/server"
 	"github.com/df-mc/dragonfly/server/player/chat"
+	"github.com/hacdan/essentialsgo"
 	"github.com/pelletier/go-toml"
 	"github.com/sirupsen/logrus"
-	pmgen "github.com/t14raptor/pm-gen"
+	gen "github.com/tristanmorgan/pm-gen"
 	"io/ioutil"
 	"os"
 )
@@ -24,15 +25,12 @@ func main() {
 	}
 
 	srv := server.New(&config, log)
+	essentialsgo.LoadCommands(srv, nil)
 	srv.CloseOnProgramEnd()
 	if err := srv.Start(); err != nil {
 		log.Fatalln(err)
 	}
-
-	w := srv.World()
-
-	w.Generator(pmgen.New(w, 6453452123115))
-	w.ReadOnly()
+	srv.World().Generator(gen.New(srv.World(), 6453452123115))
 
 	for {
 		if _, err := srv.Accept(); err != nil {

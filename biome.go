@@ -1,8 +1,8 @@
 package pmgen
 
 import (
-	"github.com/t14raptor/pm-gen/biome"
-	"github.com/t14raptor/pm-gen/rand"
+	"github.com/tristanmorgan/pm-gen/biome"
+	"github.com/tristanmorgan/pm-gen/rand"
 )
 
 type biomeSelector struct {

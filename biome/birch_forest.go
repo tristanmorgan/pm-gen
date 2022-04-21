@@ -1,7 +1,7 @@
 package biome
 
 import (
-	"github.com/t14raptor/pm-gen/populate"
+	"github.com/tristanmorgan/pm-gen/populate"
 )
 
 type BirchForest struct {

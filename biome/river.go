@@ -3,7 +3,7 @@ package biome
 import (
 	"github.com/df-mc/dragonfly/server/block"
 	"github.com/df-mc/dragonfly/server/world"
-	"github.com/t14raptor/pm-gen/populate"
+	"github.com/tristanmorgan/pm-gen/populate"
 )
 
 type River struct{}
@@ -25,8 +25,8 @@ func (r River) GroundCover() []world.Block {
 		block.Dirt{},
 		block.Dirt{},
 		block.Dirt{},
-		block.Dirt{},
-		block.Dirt{},
+		block.Gravel{},
+		block.Gravel{},
 	}
 }
 

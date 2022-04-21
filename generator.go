@@ -5,9 +5,9 @@ import (
 	"github.com/df-mc/dragonfly/server/block/model"
 	"github.com/df-mc/dragonfly/server/world"
 	"github.com/df-mc/dragonfly/server/world/chunk"
-	"github.com/t14raptor/pm-gen/biome"
-	"github.com/t14raptor/pm-gen/populate"
-	"github.com/t14raptor/pm-gen/rand"
+	"github.com/tristanmorgan/pm-gen/biome"
+	"github.com/tristanmorgan/pm-gen/populate"
+	"github.com/tristanmorgan/pm-gen/rand"
 )
 
 const SmoothSize = 2
