@@ -8,7 +8,8 @@ import (
 )
 
 var (
-	air = block.Air{}
+	air   = block.Air{}
+	water = block.Water{}
 )
 
 type Populator interface {

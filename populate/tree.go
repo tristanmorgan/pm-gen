@@ -59,8 +59,6 @@ func (SpruceTree) Grow(w *world.World, pos cube.Pos, r *rand.Random) {
 	topSize := treeHeight - int(1+r.Int31n(2))
 	lr := 2 + int(r.Int31n(2))
 
-	trunk(w, pos, block.SpruceWood(), treeHeight-int(r.Int31n(3)))
-
 	radius := int(r.Int31n(2))
 	minR, maxR := 0, 1
 
@@ -91,6 +89,8 @@ func (SpruceTree) Grow(w *world.World, pos cube.Pos, r *rand.Random) {
 			radius++
 		}
 	}
+
+	trunk(w, pos, block.SpruceWood(), treeHeight-int(r.Int31n(3)))
 }
 
 type OakTree struct{}
