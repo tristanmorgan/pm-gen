@@ -7,7 +7,7 @@ type SmallMountains struct {
 }
 
 func (m SmallMountains) Populators() []populate.Populator {
-	return nil
+	return []populate.Populator{populate.TallGrass{Amount: 2}}
 }
 
 func (m SmallMountains) ID() uint8 {

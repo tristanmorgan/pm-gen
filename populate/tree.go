@@ -142,7 +142,7 @@ func basicTop(w *world.World, pos cube.Pos, r *rand.Random, leaves block.Leaves,
 func trunk(w *world.World, pos cube.Pos, wood block.WoodType, trunkHeight int) {
 	w.SetBlock(pos.Sub(cube.Pos{0, 1}), block.Dirt{}, &world.SetOpts{DisableBlockUpdates: true, DisableLiquidDisplacement: true})
 
-	for y := 0; y < trunkHeight; y++ {
+	for y := 0; y <= trunkHeight; y++ {
 		b := w.Block(pos.Add(cube.Pos{0, y}))
 		if _, ok := overridable[b]; ok {
 			w.SetBlock(pos.Add(cube.Pos{0, y}), block.Log{Wood: wood}, &world.SetOpts{DisableBlockUpdates: true, DisableLiquidDisplacement: true})

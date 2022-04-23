@@ -8,26 +8,29 @@ import (
 	"github.com/tristanmorgan/pm-gen/rand"
 )
 
-type TallGrass struct {
+type Cactus struct {
 	Amount int
 }
 
 var (
-	grass     = block.Grass{}
-	tallGrass = block.TallGrass{}
+	sand   = block.Sand{}
+	cactus = block.Cactus{}
 )
 
-func (t TallGrass) Populate(w *world.World, pos world.ChunkPos, chunk *chunk.Chunk, r *rand.Random) {
+func (t Cactus) Populate(w *world.World, pos world.ChunkPos, chunk *chunk.Chunk, r *rand.Random) {
 	amount := r.Int31n(2) + int32(t.Amount)
 	for i := int32(0); i < amount; i++ {
 		x, z := int(r.Range(pos[0]*16, pos[0]*16+15)), int(r.Range(pos[1]*16, pos[1]*16+15))
 		if y, ok := t.highestWorkableBlock(w, x, z); ok {
-			w.SetBlock(cube.Pos{x, y, z}, tallGrass, &world.SetOpts{DisableBlockUpdates: true, DisableLiquidDisplacement: true})
+			cactusHeight := int(r.Int31n(3)) + 1
+			for h := 0; h < cactusHeight; h++ {
+				w.SetBlock(cube.Pos{x, y + h, z}, cactus, nil)
+			}
 		}
 	}
 }
 
-func (t TallGrass) highestWorkableBlock(w *world.World, x, z int) (int, bool) {
+func (t Cactus) highestWorkableBlock(w *world.World, x, z int) (int, bool) {
 	var next world.Block
 	for y := 127; y >= 0; y-- {
 		b := next
@@ -35,7 +38,7 @@ func (t TallGrass) highestWorkableBlock(w *world.World, x, z int) (int, bool) {
 			b = w.Block(cube.Pos{x, y, z})
 		}
 		next = w.Block(cube.Pos{x, y - 1, z})
-		if b == air && next == grass {
+		if b == air && next == sand {
 			return y, true
 		}
 	}
