@@ -41,6 +41,7 @@ const (
 	IDRiver
 	IDIcePlains      = 12
 	IDSmallMountains = 20
+	IDJungle         = 21
 	IDBirchForest    = 27
 )
 

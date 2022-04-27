@@ -98,6 +98,7 @@ func (g *Generator) populate(w *world.World) {
 	}
 }
 
+// maybe we should use BuildStructure instead....
 func (g *Generator) GenerateChunk(pos world.ChunkPos, chunk *chunk.Chunk) {
 	r := rand.NewRandom(0xdeadbeef ^ (int64(pos[0]) << 8) ^ int64(pos[1]) ^ g.seed)
 
@@ -110,8 +111,8 @@ func (g *Generator) GenerateChunk(pos world.ChunkPos, chunk *chunk.Chunk) {
 			var minSum, maxSum, weightSum float64
 
 			b := g.pickBiome(int64(pos[0])*16+x, int64(pos[1])*16+z)
-			for y := int16(0); y <= max; y++ {
-				chunk.SetBiome(uint8(x), miny+y, uint8(z), uint32(b.ID()))
+			for y := miny; y <= max; y++ {
+				chunk.SetBiome(uint8(x), y, uint8(z), uint32(b.ID()))
 			}
 
 			for sx := int64(-SmoothSize); sx <= SmoothSize; sx++ {
@@ -156,6 +157,9 @@ func (g *Generator) GenerateChunk(pos world.ChunkPos, chunk *chunk.Chunk) {
 					chunk.SetBlock(uint8(x), int16(y), uint8(z), 0, stone)
 				} else if y <= waterHeight {
 					chunk.SetBlock(uint8(x), int16(y), uint8(z), 0, water)
+				} else {
+					//no rock or water so just air...
+					break
 				}
 			}
 		}
@@ -163,7 +167,7 @@ func (g *Generator) GenerateChunk(pos world.ChunkPos, chunk *chunk.Chunk) {
 
 	for x := uint8(0); x < 16; x++ {
 		for z := uint8(0); z < 16; z++ {
-			b := biome.BiomeByID(uint8(chunk.Biome(x, 0, z)))
+			b := biome.BiomeByID(uint8(chunk.Biome(x, miny, z)))
 			c := b.GroundCover()
 			if len(c) > 0 {
 				var diffY int16
@@ -193,7 +197,8 @@ func (g *Generator) GenerateChunk(pos world.ChunkPos, chunk *chunk.Chunk) {
 		}
 	}
 
-	bi := biome.BiomeByID(uint8(chunk.Biome(7, 0, 7)))
+	//get the biome of the middle of the chunk
+	bi := biome.BiomeByID(uint8(chunk.Biome(7, miny, 7)))
 
 	for _, populator := range append([]populate.Populator{populate.Ore{Types: []populate.OreType{
 		{block.CoalOre{}, block.Stone{}, 20, 16, 0, 128},

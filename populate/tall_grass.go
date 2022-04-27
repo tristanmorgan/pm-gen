@@ -28,12 +28,9 @@ func (t TallGrass) Populate(w *world.World, pos world.ChunkPos, chunk *chunk.Chu
 }
 
 func (t TallGrass) highestWorkableBlock(w *world.World, x, z int) (int, bool) {
-	var next world.Block
+	next := w.Block(cube.Pos{x, 127, z})
 	for y := 127; y >= 0; y-- {
 		b := next
-		if b == nil {
-			b = w.Block(cube.Pos{x, y, z})
-		}
 		next = w.Block(cube.Pos{x, y - 1, z})
 		if b == air && next == grass {
 			return y, true

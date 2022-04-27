@@ -9,7 +9,7 @@ import (
 type Ocean struct{}
 
 func (o Ocean) Populators() []populate.Populator {
-	return []populate.Populator{populate.TallGrass{Amount: 5}}
+	return []populate.Populator{populate.Kelp{Amount: 15}}
 }
 
 func (o Ocean) ID() uint8 {
@@ -17,13 +17,13 @@ func (o Ocean) ID() uint8 {
 }
 
 func (o Ocean) Elevation() (min, max int) {
-	return 46, 58
+	return 46, 62
 }
 
 func (o Ocean) GroundCover() []world.Block {
 	return []world.Block{
 		block.Sand{},
-		block.Gravel{},
+		block.Sand{},
 		block.Gravel{},
 		block.Gravel{},
 		block.Gravel{},
