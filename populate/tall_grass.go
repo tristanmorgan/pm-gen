@@ -13,8 +13,9 @@ type TallGrass struct {
 }
 
 var (
-	grass     = block.Grass{}
-	tallGrass = block.TallGrass{}
+	grass           = block.Grass{}
+	tallGrass       = block.TallGrass{}
+	doubleTallGrass = block.DoubleTallGrass{}
 )
 
 func (t TallGrass) Populate(w *world.World, pos world.ChunkPos, chunk *chunk.Chunk, r *rand.Random) {
@@ -22,7 +23,11 @@ func (t TallGrass) Populate(w *world.World, pos world.ChunkPos, chunk *chunk.Chu
 	for i := int32(0); i < amount; i++ {
 		x, z := int(r.Range(pos[0]*16, pos[0]*16+15)), int(r.Range(pos[1]*16, pos[1]*16+15))
 		if y, ok := t.highestWorkableBlock(w, x, z); ok {
-			w.SetBlock(cube.Pos{x, y, z}, tallGrass, &world.SetOpts{DisableBlockUpdates: true, DisableLiquidDisplacement: true})
+			if t := r.Float64(); t > 0.8 {
+				w.SetBlock(cube.Pos{x, y, z}, doubleTallGrass, &world.SetOpts{DisableBlockUpdates: true, DisableLiquidDisplacement: true})
+			} else {
+				w.SetBlock(cube.Pos{x, y, z}, tallGrass, &world.SetOpts{DisableBlockUpdates: true, DisableLiquidDisplacement: true})
+			}
 		}
 	}
 }
@@ -32,7 +37,7 @@ func (t TallGrass) highestWorkableBlock(w *world.World, x, z int) (int, bool) {
 	for y := 127; y >= 0; y-- {
 		b := next
 		next = w.Block(cube.Pos{x, y - 1, z})
-		if b == air && next == grass {
+		if b == air && supportsVegetation(tallGrass, next) {
 			return y, true
 		}
 	}

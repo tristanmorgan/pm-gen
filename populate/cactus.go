@@ -35,7 +35,7 @@ func (t Cactus) highestWorkableBlock(w *world.World, x, z int) (int, bool) {
 	for y := 127; y >= 0; y-- {
 		b := next
 		next = w.Block(cube.Pos{x, y - 1, z})
-		if b == air && next == sand {
+		if b == air && supportsVegetation(cactus, next) {
 			n := w.Block(cube.Pos{x + 1, y, z})
 			e := w.Block(cube.Pos{x, y, z + 1})
 			s := w.Block(cube.Pos{x - 1, y, z})
@@ -44,4 +44,16 @@ func (t Cactus) highestWorkableBlock(w *world.World, x, z int) (int, bool) {
 		}
 	}
 	return 0, false
+}
+
+// supportsVegetation checks if the vegetation can exist on the block.
+func supportsVegetation(vegetation, block world.Block) bool {
+	soil, ok := block.(Soil)
+	return ok && soil.SoilFor(vegetation)
+}
+
+// Soil represents a block that can support vegetation.
+type Soil interface {
+	// SoilFor returns whether the vegetation can exist on the block.
+	SoilFor(world.Block) bool
 }

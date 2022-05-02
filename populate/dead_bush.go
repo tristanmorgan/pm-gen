@@ -31,7 +31,7 @@ func (t DeadBush) highestWorkableBlock(w *world.World, x, z int) (int, bool) {
 	for y := 127; y >= 0; y-- {
 		b := next
 		next = w.Block(cube.Pos{x, y - 1, z})
-		if b == air && next == sand {
+		if b == air && supportsVegetation(deadBush, next) {
 			return y, true
 		}
 	}
