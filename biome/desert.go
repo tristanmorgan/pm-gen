@@ -9,7 +9,7 @@ type Desert struct {
 }
 
 func (d Desert) Populators() []populate.Populator {
-	return []populate.Populator{populate.Cactus{Amount: 1}}
+	return []populate.Populator{populate.Cactus{Amount: 1}, populate.DeadBush{Amount: 2}}
 }
 
 func (d Desert) ID() uint8 {
