@@ -40,8 +40,11 @@ func (t Tree) highestWorkableBlock(w *world.World, x, z int) (int, bool) {
 }
 
 var overridable = map[world.Block]struct{}{
-	block.Air{}:    {},
-	block.Leaves{}: {},
+	block.Air{}:                            {},
+	block.Leaves{}:                         {},
+	block.Leaves{Wood: block.BirchWood()}:  {},
+	block.Leaves{Wood: block.OakWood()}:    {},
+	block.Leaves{Wood: block.SpruceWood()}: {},
 }
 
 type TreeType interface {

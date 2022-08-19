@@ -201,17 +201,20 @@ func (g *Generator) GenerateChunk(pos world.ChunkPos, chunk *chunk.Chunk) {
 	bi := biome.BiomeByID(uint8(chunk.Biome(7, miny, 7)))
 
 	for _, populator := range append([]populate.Populator{populate.Ore{Types: []populate.OreType{
-		{block.Bedrock{}, block.Stone{}, 8, 2, 0, 4},                                      // make bedrock rough
-		{block.Air{}, block.Stone{}, 10, 16, 0, 128},                                      //cave
-		{block.Lava{Still: true, Falling: false, Depth: 8}, block.Stone{}, 6, 16, 0, 128}, //Lava
-		{block.Dirt{}, block.Stone{}, 20, 32, 64, 128},
-		{block.Gravel{}, block.Stone{}, 10, 16, 0, 128},
-		{block.CoalOre{}, block.Stone{}, 20, 16, 0, 128},
-		{block.IronOre{}, block.Stone{}, 20, 8, 0, 64},
+		{block.Bedrock{}, block.Stone{}, 8, 8, 0, 4},                                      // make bedrock rough
+		{block.Air{}, block.Stone{}, 24, 64, 0, 128},                                      //cave
+		{block.Lava{Still: true, Falling: true, Depth: 8}, block.Stone{}, 6, 64, 0, 128}, //Lava
+		{block.Dirt{}, block.Stone{}, 24, 32, 64, 128},
+		{block.Gravel{}, block.Stone{}, 24, 16, 0, 128},
+		{block.CoalOre{}, block.Stone{}, 24, 16, 0, 128},
+		{block.IronOre{}, block.Stone{}, 24, 8, 0, 64},
 		//{ block.RedstoneOre{}, block.Stone{}, 8, 7, 0, 16 }, // TODO
 		{block.LapisOre{}, block.Stone{}, 1, 6, 0, 32},
 		{block.GoldOre{}, block.Stone{}, 2, 8, 0, 32},
 		{block.DiamondOre{}, block.Stone{}, 1, 7, 0, 16},
+		{block.Diorite{}, block.Stone{}, 24, 64, 0, 128},
+		{block.Granite{}, block.Stone{}, 24, 64, 0, 128},
+		{block.Andesite{}, block.Stone{}, 24, 64, 0, 128},
 	}}}, bi.Populators()...) {
 		g.populationQueue <- PopulationEntry{ChunkPos: pos, Chunk: chunk, Populator: populator, Random: r}
 	}
